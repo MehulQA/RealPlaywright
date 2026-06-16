@@ -46,4 +46,3 @@ export class ProductPage {
         await this.cartIcon.click();
     }
 }
-```
