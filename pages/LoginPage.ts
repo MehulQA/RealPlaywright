@@ -1,64 +1,81 @@
-import { Page, expect } from '@playwright/test';
-import { allure } from 'allure-playwright';
-import { ENV } from '../config/env';
+import { Page, Locator, expect } from '@playwright/test';
+import { Config } from '../config/env';
 
 
 
 export class LoginPage {
-  constructor(private page: Page) {}
+    readonly page: Page;
+    readonly usernameInput: Locator;
+    readonly passwordInput: Locator;
+    readonly loginButton: Locator;
+    readonly errorMessage: Locator;
 
+    constructor(page: Page) {
+        this.page = page;
 
-  private errorMessage = '[data-test="error"]';
+        this.usernameInput = page.locator('[data-test="username"]');
+        this.passwordInput = page.locator('[data-test="password"]');
+        this.loginButton = page.locator('[data-test="login-button"]');
+        this.errorMessage = page.locator('[data-test="error"]');
+    }
 
-  async verifyErrorMessage(message: string) {
-    await expect(
-      this.page.locator(this.errorMessage)
-    ).toContainText(message);
-  }
+    async navigate() {
+        await this.page.goto(Config.BASE_URL);
+    }
 
-  async navigate() {
-    await this.page.goto(ENV.baseUrl);
+    async login(username: string, password: string) {
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
+    }
 
-    const screenshot = await this.page.screenshot();
+    async loginWithProfile(
+        userType: 'standard' | 'locked' | 'invalid'
+    ) {
+        let username = '';
+        let password = '';
 
-    await allure.attachment(
-      'Login Page Screenshot',
-      screenshot,
-      'image/png'
-    );
-  }
+        switch (userType) {
+            case 'standard':
+                username = Config.STANDARD_USER;
+                password = Config.STANDARD_PASSWORD;
+                break;
 
-  async login(username?: string, password?: string) {
+            case 'locked':
+                username = Config.LOCKED_USER;
+                password = Config.LOCKED_PASSWORD;
+                break;
 
-  if (ENV.app === 'saucedemo') {
+            case 'invalid':
+                username = Config.INVALID_USER;
+                password = Config.INVALID_PASSWORD;
+                break;
+        }
 
-    await this.page.fill(
-      '#user-name',
-      username || ENV.standardUser
-    );
+        await this.login(username, password);
+    }
 
-    await this.page.fill(
-      '#password',
-      password || ENV.standardPassword
-    );
+    async verifySuccessfulLogin() {
+        await expect(this.page).toHaveURL(/inventory.html/);
+        await expect(this.page.locator('.title')).toHaveText('Products');
+    }
 
-    await this.page.click('#login-button');
-  }
+    async verifyErrorMessage(expectedMessage: string) {
+        await expect(this.errorMessage)
+            .toContainText(expectedMessage);
+    }
 
-  if (ENV.app === 'automationexercise') {
+    async logout() {
+        await this.page.locator('#react-burger-menu-btn').click();
+        await this.page.locator('#logout_sidebar_link').click();
 
-    await this.page.fill(
-      'input[data-qa="login-email"]',
-      username || ENV.username
-    );
+        await expect(this.page).toHaveURL(Config.BASE_URL);
+    }
 
-    await this.page.fill(
-      'input[data-qa="login-password"]',
-      password || ENV.password
-    );
+    async verifySessionPersistence() {
+        await this.page.reload();
 
-    await this.page.click(
-      'button[data-qa="login-button"]'
-    );
-  }
-  }}
+        await expect(this.page).toHaveURL(/inventory.html/);
+        await expect(this.page.locator('.title')).toHaveText('Products');
+    }
+}
