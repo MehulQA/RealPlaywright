@@ -68,8 +68,6 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
       },
 
-
-
       
     },
     {
@@ -80,7 +78,6 @@ export default defineConfig({
     },
     {
       name: 'API',
-      testMatch: '**/*.api.spec.ts',
-    },
+      testMatch: 'tests/api/**/*.spec.ts',    },
   ],
 });

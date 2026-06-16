@@ -1,0 +1,77 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\crud.spec.ts >> CRUD Operations >> Update User
+- Location: tests\api\crud.spec.ts:31:9
+
+# Error details
+
+```
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 200
+Received: 401
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | import { UserService } from '../../services/UserService';
+  3  | 
+  4  | test.describe('CRUD Operations', () => {
+  5  | 
+  6  |     test('Create User', async ({ request }) => {
+  7  | 
+  8  |         const userService =
+  9  |             new UserService(request);
+  10 | 
+  11 |         const response =
+  12 |             await userService.createUser(
+  13 |                 'Mehul',
+  14 |                 'QA Engineer'
+  15 |             );
+  16 | 
+  17 |         expect(response.status()).toBe(201);
+  18 |     });
+  19 | 
+  20 |     test('Get User', async ({ request }) => {
+  21 | 
+  22 |         const userService =
+  23 |             new UserService(request);
+  24 | 
+  25 |         const response =
+  26 |             await userService.getUser(2);
+  27 | 
+  28 |         expect(response.status()).toBe(200);
+  29 |     });
+  30 | 
+  31 |     test('Update User', async ({ request }) => {
+  32 | 
+  33 |         const userService =
+  34 |             new UserService(request);
+  35 | 
+  36 |         const response =
+  37 |             await userService.updateUser(2);
+  38 | 
+> 39 |         expect(response.status()).toBe(200);
+     |                                   ^ Error: expect(received).toBe(expected) // Object.is equality
+  40 |     });
+  41 | 
+  42 |     /*test('Delete User', async ({ request }) => {
+  43 | 
+  44 |         const userService =
+  45 |             new UserService(request);
+  46 | 
+  47 |         const response =
+  48 |             await userService.deleteUser(2);
+  49 | 
+  50 |         expect(response.status()).toBe(204);
+  51 |     });*/
+  52 | });
+```
