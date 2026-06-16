@@ -21,12 +21,13 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['allure-playwright']
+    
   ],
 
   use: {
     baseURL: Config.BASE_URL,
     ignoreHTTPSErrors: true,
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
   },

@@ -1,66 +1,57 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
 
-test.describe('SauceDemo Login Flow', () => {
+test.describe(' Playwright Automation Flow', () => {
 
-    test('Valid Login and Logout', async ({ page }) => {
+
+
+     // 1.Login and Logout Test
+    test('1.Valid Login and Logout', async ({ page }) => {
         const loginPage = new LoginPage(page);
-
         await loginPage.navigate();
-
         await loginPage.loginWithProfile('standard');
-
         await loginPage.verifySuccessfulLogin();
-
+        await page.waitForTimeout(3000);
         await loginPage.logout();
     });
 
-    test('Invalid Login', async ({ page }) => {
+
+        // 2.Invalid Login Test
+    test('2.Invalid Login', async ({ page }) => {
         const loginPage = new LoginPage(page);
-
         await loginPage.navigate();
-
         await loginPage.loginWithProfile('invalid');
-
-        await loginPage.verifyErrorMessage(
-            'Username and password do not match any user in this service'
-        );
+        await loginPage.verifyErrorMessage('Username and password do not match any user in this service');
+        await page.waitForTimeout(3000);
     });
+    
 
-    test('Locked User Validation', async ({ page }) => {
+       //3.Locked User Validation
+    test('3.Locked User Validation', async ({ page }) => {
         const loginPage = new LoginPage(page);
-
         await loginPage.navigate();
-
         await loginPage.loginWithProfile('locked');
-
-        await loginPage.verifyErrorMessage(
-            'Sorry, this user has been locked ou.'
-        );
+        await loginPage.verifyErrorMessage('Sorry, this user has been locked out.');
+        await page.waitForTimeout(3000);
     });
 
-    test('Validate Error Handling', async ({ page }) => {
+       //4.Validate Error Handling
+    test('4.Validate Error Handling', async ({ page }) => {
         const loginPage = new LoginPage(page);
-
         await loginPage.navigate();
-
         await loginPage.login('', '');
-
-        await loginPage.verifyErrorMessage(
-            'Username is required'
-        );
+        await loginPage.verifyErrorMessage('Username is required');
+        await page.waitForTimeout(3000);
     });
 
-    test('Session Persistence', async ({ page }) => {
+        //5.Session Persistence
+    test('5.Session Persistence', async ({ page }) => {
         const loginPage = new LoginPage(page);
-
         await loginPage.navigate();
-
         await loginPage.loginWithProfile('standard');
-
         await loginPage.verifySuccessfulLogin();
-
         await loginPage.verifySessionPersistence();
+        await page.waitForTimeout(3000);
     });
 
 });

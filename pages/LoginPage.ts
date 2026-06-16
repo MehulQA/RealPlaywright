@@ -58,6 +58,7 @@ export class LoginPage {
     async verifySuccessfulLogin() {
         await expect(this.page).toHaveURL(/inventory.html/);
         await expect(this.page.locator('.title')).toHaveText('Products');
+            console.log('✅ User is successfully logged in');
     }
 
     async verifyErrorMessage(expectedMessage: string) {
