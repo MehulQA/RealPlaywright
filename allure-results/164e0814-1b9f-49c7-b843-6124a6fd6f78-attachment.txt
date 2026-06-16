@@ -1,0 +1,4 @@
+✅ User is successfully logged in
+✅ Added product: Sauce Labs Backpack
+✅ Added 1 products to cart
+✅ Cart opened

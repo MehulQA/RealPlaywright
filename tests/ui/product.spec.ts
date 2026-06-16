@@ -1,73 +1,73 @@
-
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
-
-//import { test } from '@playwright/test';
-//import { LoginPage } from '../pages/LoginPage';
 import { ProductPage } from '../../pages/ProductPage';
 import { CartPage } from '../../pages/CartPage';
 
 test.describe('Product Flow', () => {
 
+    test.beforeEach(async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await loginPage.navigate();
+        await loginPage.loginWithProfile('standard');
+        await loginPage.verifySuccessfulLogin();
+    });
+
     test('Add Multiple Products to Cart', async ({ page }) => {
 
-        const loginPage = new LoginPage(page);
         const productPage = new ProductPage(page);
-
-        await loginPage.navigate();
-        await loginPage.loginWithProfile('standard');
 
         await productPage.addMultipleProducts([
             'Sauce Labs Backpack',
-            'Sauce Labs Bike Light',
-            'Sauce Labs Bolt T-Shirt'
+            'Sauce Labs Bike Light'
         ]);
 
-        await productPage.validateCartCount(3);
+        await productPage.validateCartCount(2);
     });
 
-    test('Remove Product From Cart', async ({ page }) => {
+    test('Remove Product from Cart', async ({ page }) => {
 
-        const loginPage = new LoginPage(page);
         const productPage = new ProductPage(page);
-        const cartPage = new CartPage(page);
-
-        await loginPage.navigate();
-        await loginPage.loginWithProfile('standard');
 
         await productPage.addMultipleProducts([
-            'Sauce Labs Backpack',
-            'Sauce Labs Bike Light'
+            'Sauce Labs Backpack'
         ]);
 
-        await productPage.openCart();
+        await productPage.validateCartCount(1);
 
-        await cartPage.removeProduct(
-            'Sauce Labs Bike Light'
+        await productPage.removeProductFromCart(
+            'Sauce Labs Backpack'
         );
 
-        await cartPage.validateCartTotal(1);
+        // Cart badge should disappear after removing last item
+        await productPage.cartBadge.waitFor({ state: 'hidden' });
     });
 
-    test('Validate Cart Totals', async ({ page }) => {
+    test('Validate Cart Total', async ({ page }) => {
 
-        const loginPage = new LoginPage(page);
         const productPage = new ProductPage(page);
         const cartPage = new CartPage(page);
 
-        await loginPage.navigate();
-        await loginPage.loginWithProfile('standard');
-
-        await productPage.addMultipleProducts([
+        const products = [
             'Sauce Labs Backpack',
-            'Sauce Labs Bike Light',
-            'Sauce Labs Bolt T-Shirt'
-        ]);
+            'Sauce Labs Bike Light'
+        ];
 
+        // Calculate expected total dynamically
+        const expectedTotal =
+            await productPage.getProductsTotal(products);
+
+        // Add products
+        await productPage.addMultipleProducts(products);
+
+        // Validate cart count
+        await productPage.validateCartCount(2);
+
+        // Open cart
         await productPage.openCart();
 
-        await cartPage.validateCartTotal(3);
+        // Validate total price
+        await cartPage.validateCartTotal(expectedTotal);
     });
 
 });
-

@@ -37,7 +37,22 @@ export default defineConfig({
        name: 'chromium',
     use: {
       ...devices['Desktop Chrome'],
+       storageState: 'playwright/.auth/user.json'
     },
+  },
+
+   {
+    name: 'Mobile Chrome',
+    use: {
+      ...devices['Pixel 5']
+    }
+  },
+
+  {
+    name: 'Mobile Safari',
+    use: {
+      ...devices['iPhone 13']
+    }
   },
 
   {
@@ -52,6 +67,10 @@ export default defineConfig({
       use: {
         ...devices['Desktop Firefox'],
       },
+
+
+
+      
     },
     {
       name: 'webkit',

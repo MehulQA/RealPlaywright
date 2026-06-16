@@ -2,6 +2,9 @@
 import { Page, expect } from '@playwright/test';
 
 export class CartPage {
+    static validateCartTotal(expectedTotal: number) {
+        throw new Error('Method not implemented.');
+    }
 
     readonly page: Page;
 
@@ -17,13 +20,18 @@ export class CartPage {
         ).toBeVisible();
     }
 
-    async validateCartTotal(expectedTotalItems: number) {
+   async validateCartTotal(expectedTotal: number) {
 
-        const totalItems =
-            await this.page.locator('.cart_item').count();
+    const prices = await this.page
+        .locator('.inventory_item_price')
+        .allTextContents();
 
-        expect(totalItems).toBe(expectedTotalItems);
-    }
+    const actualTotal = prices.reduce((sum, price) => {
+        return sum + parseFloat(price.replace('$', ''));
+    }, 0);
+
+    expect(actualTotal).toBe(expectedTotal);
+}
 
     async removeProduct(productName: string) {
         await this.page
