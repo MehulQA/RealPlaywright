@@ -78,6 +78,6 @@ export default defineConfig({
     },
     {
       name: 'API',
-      testMatch: 'tests/api/**/*.spec.ts',    },
+          },
   ],
 });

@@ -1,8 +1,10 @@
 export const userSchema = {
-    required: [
-        'id',
-        'email',
-        'first_name',
-        'last_name'
-    ]
+  type: "object",
+  required: ["name", "job", "id", "createdAt"],
+  properties: {
+    name: { type: "string" },
+    job: { type: "string" },
+    id: { type: "string" },
+    createdAt: { type: "string" }
+  }
 };
