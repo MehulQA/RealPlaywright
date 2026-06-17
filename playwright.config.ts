@@ -19,10 +19,10 @@ export default defineConfig({
 
   // Keeps command line output readable while generating deep Allure assets
   reporter: [
-    ['list'],
-    ['allure-playwright']
-    
-  ],
+  ['list'],
+  ['html', { open: 'never' }],
+  ['allure-playwright']
+],
 
   use: {
     baseURL: Config.BASE_URL,
