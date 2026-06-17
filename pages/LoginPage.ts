@@ -29,9 +29,8 @@ export class LoginPage {
         await this.loginButton.click();
     }
 
-    async loginWithProfile(
-        userType: 'standard' | 'locked' | 'invalid'
-    ) {
+    async loginWithProfile(userType: 'standard' | 'locked' | 'invalid') 
+    {
         let username = '';
         let password = '';
 
@@ -80,3 +79,4 @@ export class LoginPage {
         await expect(this.page.locator('.title')).toHaveText('Products');
     }
 }
+

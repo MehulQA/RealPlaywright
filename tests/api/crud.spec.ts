@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
+/*import { test, expect } from '@playwright/test';
 import { UserService } from '../../services/UserService';
 
-/* test.describe('CRUD Operations', () => {
+ test.describe('CRUD Operations', () => {
 
   test('Create User', async ({ request }) => {
     const userService = new UserService(request);
@@ -57,5 +57,5 @@ import { UserService } from '../../services/UserService';
     const response = await userService.deleteUser(2);
 
     expect(response.status()).toBe(204);
-  });*/
-});
+  });
+}); */

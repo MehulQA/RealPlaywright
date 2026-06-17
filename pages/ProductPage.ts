@@ -95,3 +95,4 @@ export class ProductPage {
         ).toHaveText('Products');
     }
 }
+

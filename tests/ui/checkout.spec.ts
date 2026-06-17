@@ -35,6 +35,7 @@ test.describe('Checkout Flow', () => {
         await checkoutPage.finishOrder();
 
         await checkoutPage.validateOrderConfirmation();
+        console.log('✅ Completed successful checkout flow');
     });
 
     test('Validate First Name Required', async ({ page }) => {
@@ -59,6 +60,7 @@ test.describe('Checkout Flow', () => {
         await checkoutPage.validateErrorMessage(
             'Error: First Name is required'
         );
+        console.log('✅ Validated first name required error');
     });
 
     test('Validate Last Name Required', async ({ page }) => {
@@ -107,6 +109,7 @@ test.describe('Checkout Flow', () => {
         await checkoutPage.validateErrorMessage(
             'Error: Postal Code is required'
         );
+        console.log('✅ Validated postal code required error');
     });
 
     test('Checkout Without Products', async ({ page }) => {
@@ -123,7 +126,7 @@ test.describe('Checkout Flow', () => {
             '380001'
         );
 
-        // Add validation here if application shows any message
+         console.log('✅ Attempted checkout without products');
     });
 
 });

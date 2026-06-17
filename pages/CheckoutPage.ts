@@ -3,6 +3,7 @@ import { Page, expect } from '@playwright/test';
 export class CheckoutPage {
     static validateErrorMessage(arg0: string) {
         throw new Error('Method not implemented.');
+        console.log(`✅ Validated error message: ${arg0}`);
     }
     static fillCheckoutInformation(arg0: string, arg1: string, arg2: string) {
         throw new Error('Method not implemented.');

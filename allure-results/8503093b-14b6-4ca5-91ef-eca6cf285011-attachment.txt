@@ -1,0 +1,2 @@
+✅ User is successfully logged in
+✅ Attempted checkout without products
