@@ -16,6 +16,8 @@
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.2",
     "allure-playwright": "^3.10.0",
+    "appium": "^3.5.2",
+    "appium-uiautomator2-driver": "^7.6.1",
     "cross-env": "^10.1.0"
   },
   "dependencies": {

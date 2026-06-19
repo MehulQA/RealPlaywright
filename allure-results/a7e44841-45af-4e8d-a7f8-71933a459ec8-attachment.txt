@@ -1,6 +1,0 @@
-✅ User is successfully logged in
-✅ Added product: Sauce Labs Backpack
-✅ Added product: Sauce Labs Bike Light
-✅ Added 2 products to cart
-✅ Cart count validated: 2
-✅ Removed product: Sauce Labs Backpack

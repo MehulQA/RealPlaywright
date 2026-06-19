@@ -12,48 +12,98 @@ const baseURL = process.env.BASE_URL || 'https://www.saucedemo.com';
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
   // Keeps command line output readable while generating deep Allure assets
   reporter: [
-  ['list'],
-  ['html', { open: 'never' }],
-  ['allure-playwright']
-],
+    ['list'],
+    ['html', { open: 'never' }],
+    ['allure-playwright'],
+    [environment === 'qa' ? 'line' : 'dot'],
+  ],
 
   use: {
     baseURL: Config.BASE_URL,
     ignoreHTTPSErrors: true,
     screenshot: 'on',
-    trace: 'retain-on-failure',
-    video: 'retain-on-failure',
+    trace: 'on',
+    video: 'on',
   },
 
   projects: [
-    {
-       name: 'chromium',
+  {
+    name: 'chromium',
     use: {
       ...devices['Desktop Chrome'],
-       storageState: 'playwright/.auth/user.json'
+
+    },
+  },
+
+  {
+    name: 'android',
+    use: {
+      ...devices['Pixel 7'],
+    },
+  },
+
+  {
+    name: 'iphone15',
+    use: {
+      ...devices['iPhone 15'],
+    },
+  },
+
+
+ {
+    name: 'iphone14',
+    use: {
+      ...devices['iPhone 14'],
     },
   },
 
    {
-    name: 'Mobile Chrome',
+    name: 'iphone13',
     use: {
-      ...devices['Pixel 5']
-    }
+      ...devices['iPhone 13'],
+    },
   },
 
-  {
-    name: 'Mobile Safari',
+   {
+    name: 'iphone12',
     use: {
-      ...devices['iPhone 13']
-    }
+      ...devices['iPhone 12'],
+    },
   },
+
+   {
+    name: 'iphone11',
+    use: {
+      ...devices['iPhone 11'],
+    },
+  },
+   {
+    name: 'iphoneXR',
+    use: {
+      ...devices['iPhone XR'],
+    },
+  },
+   {
+    name: 'iphoneSE',
+    use: {
+      ...devices['iPhone SE'],
+    },
+  },
+
+   {
+    name: 'iphone',
+    use: {
+      ...devices['iPhone 14'],
+    },
+  },
+
 
   {
     name: 'Google Chrome',
@@ -62,22 +112,24 @@ export default defineConfig({
       channel: 'chrome',
     },
   },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
 
-      
+  {
+    name: 'firefox',
+    use: {
+      ...devices['Desktop Firefox'],
     },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
+  },
+
+  {
+    name: 'webkit',
+    use: {
+      ...devices['Desktop Safari'],
     },
-    {
-      name: 'API',
-          },
-  ],
+  },
+
+  {
+    name: 'API',
+    use: {},
+  },
+]
 });

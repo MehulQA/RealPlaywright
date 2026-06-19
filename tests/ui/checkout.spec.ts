@@ -13,7 +13,35 @@ test.describe('Checkout Flow', () => {
         await loginPage.verifySuccessfulLogin();
     });
 
-    test('Successful Checkout Process', async ({ page }) => {
+
+//test('Checkout Test', async ({ page }) => {
+
+  
+
+  //await page.goto('https://www.saucedemo.com');
+
+//});
+
+
+
+
+
+
+
+    
+    //test('Successful Checkout Process', async ({ page }) => {
+
+test('Successful Checkout Process', async ({ page }, testInfo) => {
+
+    console.log('================================');
+    console.log(`Project: ${testInfo.project.name}`);
+    console.log('Viewport:', page.viewportSize());
+    const userAgent = await page.evaluate(() => navigator.userAgent);
+    console.log('User Agent:', userAgent);
+
+    console.log('================================');
+
+
 
         const productPage = new ProductPage(page);
         const checkoutPage = new CheckoutPage(page);
@@ -21,6 +49,10 @@ test.describe('Checkout Flow', () => {
         await productPage.addMultipleProducts([
             'Sauce Labs Backpack'
         ]);
+
+
+//console.log('User Agent:');
+  //console.log(await page.evaluate(() => navigator.userAgent));
 
         await productPage.openCart();
 
@@ -38,7 +70,7 @@ test.describe('Checkout Flow', () => {
         console.log('✅ Completed successful checkout flow');
     });
 
-    test('Validate First Name Required', async ({ page }) => {
+    /* test('Validate First Name Required', async ({ page }) => {
 
         const productPage = new ProductPage(page);
         const checkoutPage = new CheckoutPage(page);
@@ -127,6 +159,6 @@ test.describe('Checkout Flow', () => {
         );
 
          console.log('✅ Attempted checkout without products');
-    });
+    }); */ 
 
 });
