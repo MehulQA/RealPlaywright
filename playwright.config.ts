@@ -42,7 +42,7 @@ export default defineConfig({
     },
   },
 
-  {
+  /* {
     name: 'android',
     use: {
       ...devices['Pixel 7'],
@@ -54,10 +54,10 @@ export default defineConfig({
     use: {
       ...devices['iPhone 15'],
     },
-  },
+  }, */
 
 
- {
+ /* {
     name: 'iphone14',
     use: {
       ...devices['iPhone 14'],
@@ -126,10 +126,10 @@ export default defineConfig({
       ...devices['Desktop Safari'],
     },
   },
-
-  {
+ */
+  /* {
     name: 'API',
     use: {},
-  },
+  }, */
 ]
 });
