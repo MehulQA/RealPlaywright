@@ -13,7 +13,7 @@ test.describe('Playwright Automation Flow', () => {
     });
 
     // Verify that a standard user can successfully log in and log out
-    test.only('1.Valid Login and Logout', async () => {
+    test('1.Valid Login and Logout', async () => {
         await loginPage.loginWithProfile('standard');
         await loginPage.verifySuccessfulLogin();
         await loginPage.logout();
