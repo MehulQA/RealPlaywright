@@ -8,14 +8,19 @@ test.describe('Playwright Automation Flow', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         await loginPage.navigate();
+        //await page.waitForTimeout(5000);
+
     });
 
-    test('1.Valid Login and Logout', async () => {
+    // Verify that a standard user can successfully log in and log out
+    test.only('1.Valid Login and Logout', async () => {
         await loginPage.loginWithProfile('standard');
         await loginPage.verifySuccessfulLogin();
         await loginPage.logout();
+ 
     });
 
+   // Verify that an invalid user receives the correct error message
     test('2.Invalid Login', async () => {
         await loginPage.loginWithProfile('invalid');
         await loginPage.verifyErrorMessage(
@@ -23,6 +28,7 @@ test.describe('Playwright Automation Flow', () => {
         );
     });
 
+    // Verify that a locked user cannot log in and sees the appropriate error
     test('3.Locked User Validation', async () => {
         await loginPage.loginWithProfile('locked');
         await loginPage.verifyErrorMessage(
@@ -30,11 +36,15 @@ test.describe('Playwright Automation Flow', () => {
         );
     });
 
+
+    // Verify validation messages when username and password are left blank
     test('4.Validate Error Handling', async () => {
         await loginPage.login('', '');
         await loginPage.verifyErrorMessage('Username is required');
     });
 
+    
+    // Verify that the user session remains active after login
     test('5.Session Persistence', async () => {
         await loginPage.loginWithProfile('standard');
         await loginPage.verifySuccessfulLogin();

@@ -6,9 +6,7 @@ export class UserService {
   static async createUser(payload: any) {
     const request = await ApiClient.getRequest();
 
-    return await request.post('/api/users', {
-      data: payload
-    });
+    return await request.post('/api/users', {data: payload});
   }
 
   // READ
@@ -34,4 +32,7 @@ export class UserService {
     return await request.delete(`/api/users/${id}`);
   }
 }
+
+
+
 

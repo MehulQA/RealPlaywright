@@ -70,7 +70,7 @@ test('Successful Checkout Process', async ({ page }, testInfo) => {
         console.log('✅ Completed successful checkout flow');
     });
 
-    /* test('Validate First Name Required', async ({ page }) => {
+ test('Validate First Name Required', async ({ page }) => {
 
         const productPage = new ProductPage(page);
         const checkoutPage = new CheckoutPage(page);
@@ -159,6 +159,6 @@ test('Successful Checkout Process', async ({ page }, testInfo) => {
         );
 
          console.log('✅ Attempted checkout without products');
-    }); */ 
+    }); 
 
 });

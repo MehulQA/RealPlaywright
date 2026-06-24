@@ -43,6 +43,8 @@ test.describe('Product Flow', () => {
         const productPage = new ProductPage(page);
         const cartPage = new CartPage(page);
 
+            console.log('Validate Cart Total Started');
+
         const products = [
             'Sauce Labs Backpack',
             'Sauce Labs Bike Light'
@@ -66,3 +68,4 @@ test.describe('Product Flow', () => {
     }); 
 
 });
+

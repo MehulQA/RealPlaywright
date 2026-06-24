@@ -29,20 +29,27 @@ test.describe('User API CRUD Flow', () => {
     expect(isValid).toBeTruthy();
   });
 
-  // READ (Chained Request)
-  test('2. Get User (Chained)', async () => {
+  /* // READ (Chained Request)
+   test('2. Update User using Created ID', async () => {
 
-    test.setTimeout(10000); // Timeout Handling
+    console.log('Using User ID:', userId);
 
-    const response = await UserService.getUser(2);
+    const response = await UserService.updateUser(
+      userId,
+      {
+        name: 'Mehul',
+        job: 'Senior QA Engineer'
+      }
+    );
 
     expect(response.status()).toBe(200);
 
     const body = await response.json();
-    console.log(body);
-  });
 
-  // UPDATE
+    console.log('Updated User:', body);
+  }); */
+
+   // UPDATE  // READ (Chained Request)
   test('3. Update User', async () => {
 
     const response = await UserService.updateUser(2, {
@@ -90,5 +97,5 @@ test.describe('User API CRUD Flow', () => {
 
     console.log(`Test retried ${attempt} times`);
   });
-
+ 
 });
