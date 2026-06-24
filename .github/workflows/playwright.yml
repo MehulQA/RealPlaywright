@@ -11,6 +11,11 @@ on:
       - main
       - develop
 
+  schedule:
+    - cron: '35 14 * * *'   # 8:05 PM IST (14:35 UTC)
+
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
