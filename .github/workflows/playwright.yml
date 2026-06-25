@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '50 9 * * *'   # 3:20 PM IST
-    - cron: '55 9 * * *'   # 3:25 PM IST
+    - cron: '45 10 * * *'   # 4:15 PM IST
+    - cron: '50 10 * * *'   # 4:20 PM IST
 
 jobs:
   test:
