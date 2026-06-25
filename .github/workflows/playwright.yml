@@ -12,7 +12,7 @@ on:
       - develop
 
   schedule:
-    - cron: '45 14 * * *'   # 8:05 PM IST (14:35 UTC)
+    - cron: '40 8 * * *'   # 2:10 PM IST (08:40 UTC)
 
   workflow_dispatch:
 
