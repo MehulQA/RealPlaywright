@@ -1,19 +1,19 @@
 name: Playwright Tests
 
 on:
-  push:
-    branches:
-      - main
-      - develop
+#  push:
+#   branches:
+#      - main
+#      - develop
 
-  pull_request:
-    branches:
-      - main
-      - develop
+#  pull_request:
+#    branches:
+#      - main
+#      - develop*/
 
   schedule:
-    - cron: '50 8 * * *'   # 2:20 PM IST (08:50 UTC)
-
+    -  cron: '20 9 * * *'   # 2:50 PM IST
+    -  cron: '25 9 * * *'   # 2:55 PM IST
   workflow_dispatch:
 
 jobs:
